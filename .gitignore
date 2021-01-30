@@ -1,0 +1,56 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Library/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+obj/
+*.svd
+*.userprefs
+/*.csproj
+*.pidb
+*.suo
+/*.sln
+*.user
+*.unityproj
+*.booproj
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+
+# ======= #
+# Custom  #
+# ======= #
+UnityVS/
+Builds/
+SavedGames/
+PlayerData/
+Art/
+.vs/
+Profiler/
+
+
+Assets/FMODStudioCache.asset
+
+fmod.log
+fmod_editor.log
+
+# FMOD studio (In folder FMODLBL)
+FMODLBL/**.user
+FMODLBL/**.unsaved
+FMODLBL/**.restore
+
+FMODLBL/\.cache/
