@@ -9,7 +9,10 @@ public class UIController : MonoBehaviour
     bool endGame;
     public GameObject menuPanel;
 
-    public 
+    public Text resumeRestartText;
+    public Text resumeRestartButton;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,8 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (endGame)
+            return;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (paused)
@@ -30,10 +35,29 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void ConfigurePause()
+    {
+        resumeRestartText.text = "Pause";
+        resumeRestartButton.text = "Resume";
+    }
+
+    public void ConfigureRestart()
+    {
+        resumeRestartText.text = "New Game?";
+        resumeRestartButton.text = "Restart";
+        endGame = true;
+        PauseGame();
+    }
+
     public void OnResumeRestart()
     {
         if (!endGame)
         {
+            ResumeGame();
+        }
+        else
+        {
+            ConfigurePause();
             ResumeGame();
         }
     }
