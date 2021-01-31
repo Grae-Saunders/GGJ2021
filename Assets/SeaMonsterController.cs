@@ -16,13 +16,14 @@ public class SeaMonsterController : MonoBehaviour
 
     public float submergeDistance;
 
-    private void Start()
+    public void StartLurking(float startPos)
     {
         adjustedEndPosition = new Vector3(endPosition.x, submergeDepth, endPosition.z);
         adjustedStartPosition = new Vector3(startPosition.x, submergeDepth, startPosition.z);
-        var startPos = Random.Range(0f, 1f);
+        
         transform.position = Vector3.Lerp(startPosition,endPosition,startPos);
     }
+
 
     void Update()
     {

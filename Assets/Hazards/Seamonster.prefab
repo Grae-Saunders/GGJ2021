@@ -70,9 +70,10 @@ GameObject:
   m_Component:
   - component: {fileID: 532169258619136642}
   - component: {fileID: 65333402357225979}
+  - component: {fileID: 7507847259940532711}
   m_Layer: 0
   m_Name: Seamonster
-  m_TagString: Untagged
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,6 +113,20 @@ MonoBehaviour:
   travelSpeed: 15
   normalDepth: 1
   submergeDistance: 10
+--- !u!136 &7507847259940532711
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876361016824311864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 4
+  m_Height: 17.14
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 2.78}
 --- !u!1 &3625740726334522217
 GameObject:
   m_ObjectHideFlags: 0

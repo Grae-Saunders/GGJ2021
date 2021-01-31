@@ -12,6 +12,10 @@ public class UIController : MonoBehaviour
     public Text resumeRestartText;
     public Text resumeRestartButton;
 
+    public Text timerText;
+    public Text scoreText;
+
+    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,7 @@ public class UIController : MonoBehaviour
     {
         if (endGame)
             return;
+        UpdateUI();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (paused)
@@ -77,4 +82,11 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1;
         menuPanel.SetActive(false);
     }
+    private void UpdateUI()
+    {
+        scoreText.text = $"Retrieval: {gameManager.playerLevel}";
+        var formattedTime =  string.Format("{0}:{1:00}", (int)gameManager.currentRoundTimer / 60, (int)gameManager.currentRoundTimer % 60);
+        timerText.text = $"Time: -{formattedTime}";
+    }
+
 }

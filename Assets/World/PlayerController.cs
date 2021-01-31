@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
 
 
     public GameManager manager;
-    public DrunkenSailor drunkenSailor;
 
     Collider collider;
 
@@ -92,10 +91,10 @@ public class PlayerController : MonoBehaviour
             hasControl = false;
             hasFoundTreasure = true;
             manager.WinCondition();
-            drunkenSailor.BeginEffect(manager.playerLevel);
             collider.enabled = false;
             treasure = other.transform.parent;
             body.velocity = Vector3.zero;
+               
         }
     }
 

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public int playerLevel;
 
-    float currentRoundTimer;
+    public float currentRoundTimer;
     public float minimumLevelCompletionTime;
     public float currentLevelCompletionTime;
 
@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
     public GameObject player;
 
     public UIController uiController;
+
+    public AudioSource playerSounds;
+
+    public AudioClip celebrate;
+    public AudioClip hangover;
 
     public float mapSize;
 
@@ -44,6 +49,7 @@ public class GameManager : MonoBehaviour
         {
             possibleSpawns.Add(spawn);
         }
+        currentRoundTimer = currentLevelCompletionTime;
     }
     void Update()
     {
@@ -58,8 +64,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            currentRoundTimer += Time.deltaTime;
-            if (currentRoundTimer > currentLevelCompletionTime)
+            currentRoundTimer -= Time.deltaTime;
+            if (currentRoundTimer < 0)
                 GameOver();
 
         }
@@ -75,12 +81,14 @@ public class GameManager : MonoBehaviour
         player.transform.position = possibleSpawns[newSpawnIndex].position;
 
         player.GetComponent<PlayerController>().NewRoundOrRestart();
+        playerSounds.PlayOneShot(hangover);
     }
     public void WinCondition()
     {
         newRoundTimer = 0;
-        currentRoundTimer = 0;
+        currentRoundTimer = currentLevelCompletionTime;
         waitingForNextRound = true;
+        playerSounds.PlayOneShot(celebrate);
     }
 
     public void GameOver()
@@ -93,7 +101,7 @@ public class GameManager : MonoBehaviour
     {
         playerLevel = 0;
         player.transform.position = Vector3.zero;
-        currentRoundTimer = 0;
+        currentRoundTimer = currentLevelCompletionTime;
         player.GetComponent<PlayerController>().NewRoundOrRestart();
 
         uiController.ConfigureRestart();
