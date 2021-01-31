@@ -8,8 +8,12 @@ public class GameManager : MonoBehaviour
     public Transform EndGoalParent;
     public List<Transform> possibleEndGoals;
 
+    public Transform treasure;
+
+    int totalHazards;
     public Transform HazardParent;
     public List<Transform> possibleHazards;
+    public GameObject hazardPrefab;
 
     public Transform SpawnParent;
     public List<Transform> possibleSpawns;
@@ -50,6 +54,7 @@ public class GameManager : MonoBehaviour
             possibleSpawns.Add(spawn);
         }
         currentRoundTimer = currentLevelCompletionTime;
+        totalHazards = possibleHazards.Count;
     }
     void Update()
     {
@@ -74,6 +79,8 @@ public class GameManager : MonoBehaviour
 
     private void CommenceNewRound()
     {
+        MoveTreasure();
+        SpawnAnObstacle();
         playerLevel++;
         waitingForNextRound = false;
 
@@ -105,6 +112,18 @@ public class GameManager : MonoBehaviour
         player.GetComponent<PlayerController>().NewRoundOrRestart();
 
         uiController.ConfigureRestart();
+        possibleHazards.Clear();
+        foreach (Transform hazard in HazardParent)
+        {
+            possibleHazards.Add(hazard);
+        }
+        foreach (var loc in possibleHazards)
+        {
+            foreach (Transform child in loc)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
 
     }
     private bool CheckPlayerInMap()
@@ -114,5 +133,21 @@ public class GameManager : MonoBehaviour
              || player.transform.position.z > halfMapSize || player.transform.position.z < -halfMapSize)
             return false;
         return true;
+    }
+
+    private void MoveTreasure()
+    {
+        var newTreasureLocation = Random.Range(0, possibleEndGoals.Count);
+        treasure.SetParent(possibleEndGoals[newTreasureLocation]);
+        treasure.localPosition = Vector3.zero;
+    }
+    private void SpawnAnObstacle()
+    {
+        if (playerLevel < totalHazards && possibleHazards.Count !=0)
+        {
+            var newLocation = Random.Range(0, possibleHazards.Count);
+            GameObject go = GameObject.Instantiate(hazardPrefab, possibleHazards[newLocation]);
+            possibleHazards.RemoveAt(newLocation);
+        }
     }
 }

@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public GameManager manager;
 
-    Collider collider;
+    new Collider collider;
 
     void Start()
     {
@@ -75,12 +75,6 @@ public class PlayerController : MonoBehaviour
         var angle = Mathf.Atan2(-targetPosition.z, targetPosition.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
 
-
-        //Vector3 lookDir = transform.position - targetPosition;
-        //lookDir.y = 0;
-        //transform.rotation = Quaternion.LookRotation(lookDir);
-
-
         rotationEuler = transform.rotation.eulerAngles;
     }
     private void OnTriggerEnter(Collider other)
@@ -94,7 +88,11 @@ public class PlayerController : MonoBehaviour
             collider.enabled = false;
             treasure = other.transform.parent;
             body.velocity = Vector3.zero;
-               
+
+        }
+        if (other.tag == "Hazard")
+        {
+            manager.GameOver();
         }
     }
 

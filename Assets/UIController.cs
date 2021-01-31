@@ -63,6 +63,7 @@ public class UIController : MonoBehaviour
         else
         {
             ConfigurePause();
+            endGame = false;
             ResumeGame();
         }
     }
